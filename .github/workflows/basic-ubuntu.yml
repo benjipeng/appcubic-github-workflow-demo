@@ -46,6 +46,7 @@ jobs:
           source $HOME/.bashrc
       - name: Verify Node.js installation
         run: |
+          source $HOME/.bashrc
           nvm use default
           echo "Node.js version: $(node -v)"
           echo "npm version: $(npm -v)"
