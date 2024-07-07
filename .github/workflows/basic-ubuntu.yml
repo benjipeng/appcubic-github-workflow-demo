@@ -26,4 +26,8 @@ jobs:
           uname -a
       - name: Run Fastfetch
         run: fastfetch
+      - name: Imaginary Node
+        env:
+          NODE_VERSION: 20
+        run: echo "Node.js version: $(NODE_VERSION)"
           
