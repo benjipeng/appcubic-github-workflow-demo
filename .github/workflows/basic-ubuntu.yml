@@ -29,5 +29,6 @@ jobs:
       - name: Imaginary Node
         env:
           NODE_VERSION: 20
-        run: echo "Node.js version is $NODE_VERSION"
+        run: |
+          echo "Node.js version is: $NODE_VERSION" # | is for multiline block
           
