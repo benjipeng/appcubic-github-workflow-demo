@@ -3,6 +3,9 @@ on:
   push:
     branches:
       - main
+env:
+  NVM_DIR: /home/runner/.nvm
+  NODE_VERSION: 20
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -28,7 +31,17 @@ jobs:
         run: fastfetch
       - name: Imaginary Node
         env:
-          NODE_VERSION: 20
+          TARGET_NODE_VERSION: 20
         run: |
-          echo "Node.js version is: $NODE_VERSION" # | is for multiline block
-          
+          echo "The Target Node.js version is: $TARGET_NODE_VERSION" # | is for multiline block
+      - name: Install NVM and Node.js
+        run: |
+          curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+          . $NVM_DIR/nvm.sh
+          nvm install $NODE_VERSION
+          nvm alias default $NODE_VERSION
+          nvm use default
+      - name: Verify Node.js installation
+        run: |
+          echo "Node.js version: $(node -v)"
+          echo "npm version: $(npm -v)"
