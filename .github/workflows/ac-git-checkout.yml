@@ -26,3 +26,5 @@ jobs:
           # Optionally checkout a specific branch
           git fetch origin ${BRANCH}
           git checkout -b current-branch FETCH_HEAD
+
+          ls -la
