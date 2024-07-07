@@ -1,0 +1,28 @@
+name: Custom Git Checkout - AppCubic & Benji P
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Update and Install Git
+        run: sudo apt-get update && sudo apt-get install git
+
+      - name: Clone this repo
+        env:
+          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          REPOSITORY: ${{ github.repository }}
+          BRANCH: ${{ github.ref }}
+        run: |
+          # Configure git
+          git config --global user.email "test@abc.com"
+          git config --global user.name "Test Abc"
+          
+          # Clone using HTTPS and Access Token for authentication
+          git clone https://x-access-token:${ACCESS_TOKEN}@github.com/${REPOSITORY}.git .
+          
+          # Optionally checkout a specific branch
+          git fetch origin ${BRANCH}
+          git checkout -b current-branch FETCH_HEAD
