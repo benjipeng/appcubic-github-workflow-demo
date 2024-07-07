@@ -10,7 +10,10 @@ jobs:
       - name: Update package list
         run: sudo apt-get update
       - name: Install Fastfetch
-        run: sudo apt-get install -y fastfetch
+        run: |
+          wget https://github.com/fastfetch-cli/fastfetch/releases/download/2.17.2/fastfetch-linux-amd64.deb
+          sudo dpkg -i fastfetch-linux-amd64.deb
+          sudo apt-get install -f
       - name: Run basic Ubuntu commands
         run: |
           echo "Current Dir:"
