@@ -45,7 +45,7 @@ jobs:
           nvm use default
           echo 'export NVM_DIR="$([ -z "${XDG_CONFIG_HOME-}" ] && printf %s "${HOME}/.nvm" || printf %s "${XDG_CONFIG_HOME}/nvm")"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"' >> $HOME/.bashrc
-          echo $NVM_DIR
+          cat $HOME/.bashrc
       - name: Verify Node.js installation
         run: |
           source $HOME/.bashrc
