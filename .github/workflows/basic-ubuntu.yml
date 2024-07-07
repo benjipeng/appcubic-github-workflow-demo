@@ -1,0 +1,26 @@
+name: Bacics in Ubuntu
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Update package list
+        run: sudo apt-get update
+      - name: Install Fastfetch
+        run: sudo apt-get install -y fastfetch
+      - name: Run basic Ubuntu commands
+        run: |
+          echo "Current Dir:"
+          pwd
+          echo "Dir. Contents:"
+          ls -la
+          echo "Current User:"
+          whoami
+          echo "Sys Info:"
+          uname -a
+      - name: Run Fastfetch
+        run: fastfetch
+          
