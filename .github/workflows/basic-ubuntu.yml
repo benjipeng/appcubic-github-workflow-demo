@@ -50,7 +50,7 @@ jobs:
         run: |
           source $HOME/.bashrc
           echo "Current nvm is at: $NVM_DIR"
-          which node
+          echo "Current Node is at $(which node) and current nvm is at $(which nvm)"
           export NVM_DIR="$HOME/.nvm"
           [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
           [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
