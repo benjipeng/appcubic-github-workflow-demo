@@ -18,5 +18,5 @@ export default defineConfig({
       '@': path.resolve(__dirname, './src'),
     },
   },
-  base: '/appcubic-github-workflow-demo/'
+  base: '/appcubic-github-workflow-demo/',
 })
