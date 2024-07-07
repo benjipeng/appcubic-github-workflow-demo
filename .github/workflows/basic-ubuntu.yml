@@ -51,5 +51,9 @@ jobs:
         run: |
           cat $HOME/.bashrc
           which node
+          export NVM_DIR="$HOME/.nvm"
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"
+          nvm use default
           echo "Node.js version: $(node -v)"
           echo "npm version: $(npm -v)"
