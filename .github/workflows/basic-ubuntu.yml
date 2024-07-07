@@ -10,6 +10,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Show Curent Shell
+        run: echo $SHELL
       - name: Update package list
         run: sudo apt-get update
       - name: Install Fastfetch
