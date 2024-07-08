@@ -6,15 +6,13 @@
         <MenubarMenu>
           <MenubarTrigger class="font-bold">Menu</MenubarTrigger>
           <MenubarContent>
-            <MenubarItem>
-              <router-link to="/">Home</router-link>
-            </MenubarItem>
-            <MenubarItem>
-              <router-link to="/about">About</router-link>
-            </MenubarItem>
             <MenubarItem
-              ><router-link to="/landing">Landing</router-link></MenubarItem
+              v-for="route in routes"
+              :key="route.path"
+              @click="navigateTo(route.path)"
             >
+              {{ route.name }}
+            </MenubarItem>
           </MenubarContent>
         </MenubarMenu>
         <div class="ml-auto flex items-center">
@@ -47,9 +45,22 @@ import { SunIcon, MoonIcon, PaletteIcon, DropletIcon } from "lucide-vue-next";
 
 import { useColorMode } from "@/composibles/useColorMode";
 import { useTheme } from "@/composibles/useTheme";
+import { useRouter } from "vue-router";
 
 const { isColorful, toggleColorMode } = useColorMode();
 const { isDark, toggleTheme } = useTheme();
+
+const router = useRouter();
+
+const routes = [
+  { path: "/", name: "Home" },
+  { path: "/about", name: "About" },
+  { path: "/landing", name: "Landing" },
+];
+
+const navigateTo = (path: string) => {
+  router.push(path);
+};
 
 // const toggleTheme = () => {
 //   isDark.value = !isDark.value;
