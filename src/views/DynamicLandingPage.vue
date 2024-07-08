@@ -15,18 +15,12 @@
       </div>
       <div class="absolute inset-0 pointer-events-none">
         <transition-group name="float" tag="div">
-          <rocket-icon
-            v-for="i in 5"
-            :key="`rocket-${i}`"
-            :style="iconStyles[i - 1]"
-            class="text-primary absolute"
-            :size="48"
-          />
-          <zap-icon
-            v-for="i in 5"
-            :key="`zap-${i}`"
-            :style="iconStyles[i + 4]"
-            class="text-secondary absolute"
+          <component
+            v-for="(icon, index) in icons"
+            :key="icon.type.toString() + index"
+            :is="icon.type"
+            :style="iconStyles[index]"
+            class="absolute transition-all duration-1000 ease-in-out"
             :size="48"
           />
         </transition-group>
@@ -109,7 +103,33 @@ import {
   LayoutIcon,
   BrushIcon,
   ShieldIcon,
+  StarIcon,
+  HeartIcon,
 } from "lucide-vue-next";
+import { useColorMode } from "@/composibles/useColorMode";
+
+const { isColorful } = useColorMode();
+
+const icons = [
+  { type: RocketIcon },
+  { type: ZapIcon },
+  { type: StarIcon },
+  { type: HeartIcon },
+  { type: RocketIcon },
+  { type: ZapIcon },
+  { type: StarIcon },
+  { type: HeartIcon },
+];
+
+const iconStyles = ref(
+  icons.map(() => ({
+    top: "0px",
+    left: "0px",
+    transform: "translate(0px, 0px) rotate(0deg)",
+    opacity: 1,
+    color: "#000000",
+  }))
+);
 
 const features = [
   {
@@ -150,27 +170,60 @@ const testimonials = [
   },
 ];
 
-const iconStyles = ref(
-  Array(10)
-    .fill(null)
-    .map(() => ({
-      top: "0px",
-      left: "0px",
-      transform: "translate(0px, 0px) rotate(0deg)",
-      opacity: 1,
-    }))
-);
-
 const updateIconPositions = () => {
-  iconStyles.value = iconStyles.value.map(() => ({
-    top: `${Math.random() * 100}%`,
-    left: `${Math.random() * 100}%`,
-    transform: `translate(${Math.random() * 40 - 20}px, ${
-      Math.random() * 40 - 20
-    }px) rotate(${Math.random() * 360}deg)`,
-    opacity: Math.random() * 0.5 + 0.5,
-  }));
+  const time = Date.now() * 0.001;
+  iconStyles.value = icons.map((_, index) => {
+    const angle = (index / icons.length) * Math.PI * 2 + time;
+    const x = Math.cos(angle) * 40 + 50;
+    const y = Math.sin(angle) * 40 + 50;
+    return {
+      top: `${y}%`,
+      left: `${x}%`,
+      transform: `translate(-50%, -50%) rotate(${angle * 30}deg)`,
+      opacity: 0.7 + Math.sin(time + index) * 0.3,
+      color: isColorful.value ? getPastelColor(index) : "currentColor",
+    };
+  });
 };
+
+const getPastelColor = (index: number) => {
+  const hue = (index * 137.508) % 360; // Use golden angle approximation for distribution
+  return `hsl(${hue}, 70%, 80%)`;
+};
+
+// const updateIconPositions = () => {
+//   const screenHeight = window.innerHeight;
+//   const screenWidth = window.innerWidth;
+//   const scrollY = window.scrollY;
+
+//   iconStyles.value = iconStyles.value.map((_, index) => {
+//     // Calculate a base Y position in a wave pattern
+//     const waveAmplitude = screenHeight / 3; // Amplitude of the wave
+//     const waveFrequency = 2; // How many waves across the screen width
+//     const yOffset =
+//       Math.sin(
+//         (scrollY / screenHeight + index / iconStyles.value.length) *
+//           Math.PI *
+//           waveFrequency
+//       ) * waveAmplitude;
+
+//     return {
+//       top: `${50 + yOffset}px`,
+//       left: `${(index / iconStyles.value.length) * 100}%`,
+//       transform: `translate(-50%, -50%) rotate(${
+//         scrollY + (index * 360) / iconStyles.value.length
+//       }deg)`,
+//       opacity:
+//         0.5 +
+//         0.5 *
+//           Math.cos(
+//             (scrollY / screenHeight + index / iconStyles.value.length) *
+//               Math.PI *
+//               waveFrequency
+//           ),
+//     };
+//   });
+// };
 
 const handleScroll = () => {
   updateIconPositions();
@@ -194,6 +247,22 @@ onUnmounted(() => {
 </script>
 
 <style scoped>
+.colorful-mode {
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.colorful-mode h1,
+.colorful-mode h2 {
+  color: #5d5b8d;
+}
+
+.colorful-mode p {
+  color: #7b7d7d;
+}
+
+.colorful-mode .bg-muted {
+  background-color: rgba(255, 255, 255, 0.7);
+}
 .float-enter-active,
 .float-leave-active {
   transition: all 2s ease;

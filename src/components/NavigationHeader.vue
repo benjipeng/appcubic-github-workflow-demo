@@ -18,6 +18,11 @@
           </MenubarContent>
         </MenubarMenu>
         <div class="ml-auto flex items-center">
+          <Button variant="ghost" size="icon" @click="toggleColorMode">
+            <palette-icon v-if="!isColorful" class="h-[1.2rem] w-[1.2rem]" />
+            <droplet-icon v-else class="h-[1.2rem] w-[1.2rem]" />
+            <span class="sr-only">Toggle color mode</span>
+          </Button>
           <Button variant="ghost" size="icon" @click="toggleTheme">
             <sun-icon v-if="!isDark" class="h-[1.2rem] w-[1.2rem]" />
             <moon-icon v-else class="h-[1.2rem] w-[1.2rem]" />
@@ -39,9 +44,13 @@ import {
   MenubarTrigger,
 } from "@/components/ui/menubar";
 import { Button } from "@/components/ui/button";
-import { SunIcon, MoonIcon } from "lucide-vue-next";
+import { SunIcon, MoonIcon, PaletteIcon, DropletIcon } from "lucide-vue-next";
+
+import { useColorMode } from "@/composibles/useColorMode";
 
 const isDark = ref(false);
+
+const { isColorful, toggleColorMode } = useColorMode();
 
 const toggleTheme = () => {
   isDark.value = !isDark.value;
