@@ -35,7 +35,6 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
 import {
   Menubar,
   MenubarContent,
@@ -47,13 +46,13 @@ import { Button } from "@/components/ui/button";
 import { SunIcon, MoonIcon, PaletteIcon, DropletIcon } from "lucide-vue-next";
 
 import { useColorMode } from "@/composibles/useColorMode";
-
-const isDark = ref(false);
+import { useTheme } from "@/composibles/useTheme";
 
 const { isColorful, toggleColorMode } = useColorMode();
+const { isDark, toggleTheme } = useTheme();
 
-const toggleTheme = () => {
-  isDark.value = !isDark.value;
-  document.documentElement.classList.toggle("dark", isDark.value);
-};
+// const toggleTheme = () => {
+//   isDark.value = !isDark.value;
+//   document.documentElement.classList.toggle("dark", isDark.value);
+// };
 </script>

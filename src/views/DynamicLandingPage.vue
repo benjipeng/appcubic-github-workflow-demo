@@ -19,7 +19,7 @@
             v-for="(icon, index) in icons"
             :key="icon.type.toString() + index"
             :is="icon.type"
-            :style="iconStyles[index]"
+            :style="getIconStyle(index)"
             class="absolute transition-all duration-1000 ease-in-out"
             :size="48"
           />
@@ -170,9 +170,25 @@ const testimonials = [
   },
 ];
 
+const iconPositions = ref(
+  icons.map(() => ({
+    top: "0px",
+    left: "0px",
+    transform: "translate(0px, 0px) rotate(0deg)",
+    opacity: 1,
+  }))
+);
+
+const getIconStyle = (index: number) => {
+  return {
+    ...iconPositions.value[index],
+    color: isColorful.value ? getPastelColor(index) : "currentColor",
+  };
+};
+
 const updateIconPositions = () => {
   const time = Date.now() * 0.001;
-  iconStyles.value = icons.map((_, index) => {
+  iconPositions.value = icons.map((_, index) => {
     const angle = (index / icons.length) * Math.PI * 2 + time;
     const x = Math.cos(angle) * 40 + 50;
     const y = Math.sin(angle) * 40 + 50;
@@ -181,7 +197,7 @@ const updateIconPositions = () => {
       left: `${x}%`,
       transform: `translate(-50%, -50%) rotate(${angle * 30}deg)`,
       opacity: 0.7 + Math.sin(time + index) * 0.3,
-      color: isColorful.value ? getPastelColor(index) : "currentColor",
+      // color: isColorful.value ? getPastelColor(index) : "currentColor",
     };
   });
 };
