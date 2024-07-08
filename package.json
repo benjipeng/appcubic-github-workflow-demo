@@ -11,7 +11,10 @@
   "dependencies": {
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
+    "dompurify": "^3.1.6",
+    "highlight.js": "^11.10.0",
     "lucide-vue-next": "^0.400.0",
+    "marked": "^13.0.2",
     "radix-vue": "^1.9.0",
     "tailwind-merge": "^2.4.0",
     "tailwindcss-animate": "^1.0.7",
@@ -19,6 +22,8 @@
     "vue-router": "4"
   },
   "devDependencies": {
+    "@tailwindcss/typography": "^0.5.13",
+    "@types/dompurify": "^3.0.5",
     "@types/node": "^20.14.10",
     "@vitejs/plugin-vue": "^5.0.5",
     "autoprefixer": "^10.4.19",

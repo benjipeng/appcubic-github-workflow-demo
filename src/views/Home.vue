@@ -1,8 +1,25 @@
+<script setup lang="ts">
+import { ref, onMounted } from "vue";
+import MarkdownRenderer from "../components/MarkdownRenderer.vue";
+import { loadMarkdownFile } from "@/utils/markdown";
+
+const markdownContent = ref("");
+const error = ref("");
+
+onMounted(async () => {
+  try {
+    markdownContent.value = await loadMarkdownFile("getting-started");
+  } catch (e) {
+    error.value = "Failed to load markdown content";
+    console.error(e);
+  }
+});
+</script>
+
 <template>
-  <div class="py-10">
-    <h1 class="flex justify-center text-4xl font-bold mb-4">
-      Welcome to Github Workflow Demo
-    </h1>
-    <p>This is the home page of Github Workflow Demo.</p>
+  <div class="container mx-auto px-4 py-10">
+    <div v-if="error" class="text-red-500">{{ error }}</div>
+    <MarkdownRenderer v-else :content="markdownContent" />
   </div>
 </template>
+```
