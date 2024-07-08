@@ -121,15 +121,15 @@ const icons = [
   { type: HeartIcon },
 ];
 
-const iconStyles = ref(
-  icons.map(() => ({
-    top: "0px",
-    left: "0px",
-    transform: "translate(0px, 0px) rotate(0deg)",
-    opacity: 1,
-    color: "#000000",
-  }))
-);
+// const iconStyles = ref(
+//   icons.map(() => ({
+//     top: "0px",
+//     left: "0px",
+//     transform: "translate(0px, 0px) rotate(0deg)",
+//     opacity: 1,
+//     color: "#000000",
+//   }))
+// );
 
 const features = [
   {
