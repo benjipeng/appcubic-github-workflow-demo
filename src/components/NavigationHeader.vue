@@ -12,6 +12,9 @@
             <MenubarItem>
               <router-link to="/about">About</router-link>
             </MenubarItem>
+            <MenubarItem
+              ><router-link to="/landing">Landing</router-link></MenubarItem
+            >
           </MenubarContent>
         </MenubarMenu>
         <div class="ml-auto flex items-center">

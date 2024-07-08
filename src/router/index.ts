@@ -13,6 +13,11 @@ const routes = [
         name: 'About',
         // component: About
         component: () => import('../views/About.vue')
+    },
+    {
+        path: '/landing',
+        name: 'landing',
+        component: () => import('../views/DynamicLandingPage.vue')
     }
 ]
 
