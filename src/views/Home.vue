@@ -22,4 +22,3 @@ onMounted(async () => {
     <MarkdownRenderer v-else :content="markdownContent" />
   </div>
 </template>
-```
